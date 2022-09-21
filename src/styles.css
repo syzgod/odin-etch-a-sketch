@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --grid-cols: 1;
+  --grid-rows: 1;
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 0.2em;
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  border: 1px solid #000000;
+
+  width: 10px;
+  height: 10px;
+}
