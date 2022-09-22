@@ -1,9 +1,8 @@
 /*
- - create grids
- - when hover over the cells change their colors, most likely need to loop over the cells and check e.target
- - limit cell size
- - divide problem into smaller pieces and solve them in smaller scale
- - work with a smaller grid to reproduce the result
+ TODO - divide problem into smaller pieces and solve them in smaller scale
+ TODO - work with a smaller grid to reproduce the result
+ TODO - ask for input(prompt from a button) to set up grid max 36*36
+ TODO - setup functionality to color picker / shader so as the board reset
 
 */
 
@@ -14,14 +13,21 @@ function makeRows(rows, cols) {
   grids.style.setProperty("--grid-cols", cols);
   for (c = 0; c < rows * cols; c++) {
     let cell = document.createElement("div");
-    cell.innerText = c + 1;
+    // cell.innerText = c + 1;
     grids.appendChild(cell).className = "grid-item";
   }
 }
 
-makeRows(3, 3);
+makeRows(32, 32);
 
-grids.addEventListener("mouseover", function (e) {
-  console.log(e);
-  e.style.backgroundColor = "red";
+const mesh = [...grids.childNodes];
+
+mesh.forEach(function (node) {
+  node.addEventListener("mouseenter", function (e) {
+    e.target.style.backgroundColor = "red";
+
+    // setTimeout(() => {
+    //   e.target.style.backgroundColor = "pink";
+    // }, 300);
+  });
 });
