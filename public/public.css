@@ -555,6 +555,14 @@ video {
   display: flex;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
+.w-14 {
+  width: 3.5rem;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -571,18 +579,14 @@ video {
   padding: 1rem;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
 
 :root {
-  --grid-cols: 1;
   --grid-rows: 1;
+  --grid-cols: 1;
 }
 
 .grid-container {
@@ -591,8 +595,8 @@ video {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  grid-template-rows: repeat(var(--grid-rows), 1fr);
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  grid-template-rows: repeat(var(--grid-cols), 1fr);
+  grid-template-columns: repeat(var(--grid-rows), 1fr);
 }
 
 .grid-item {
@@ -606,6 +610,7 @@ video {
 }
 
 .btn-primary {
+  margin: 0.25rem;
   border-radius: 0.25rem;
   border-width: 2px;
   --tw-border-opacity: 1;

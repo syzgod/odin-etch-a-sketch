@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --grid-cols: 1;
   --grid-rows: 1;
+  --grid-cols: 1;
 }
 
 .grid-container {
   display: grid;
   grid-gap: 0.1em;
   width: fit-content;
-  grid-template-rows: repeat(var(--grid-rows), 1fr);
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  grid-template-rows: repeat(var(--grid-cols), 1fr);
+  grid-template-columns: repeat(var(--grid-rows), 1fr);
 }
 
 .grid-item {
@@ -27,5 +27,5 @@
 }
 
 .btn-primary {
-  @apply rounded border-2 border-neutral-900 p-1;
+  @apply m-1 rounded border-2 border-neutral-900 p-1;
 }
