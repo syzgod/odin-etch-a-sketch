@@ -9,9 +9,9 @@
     <title>Etch-A-Sketch</title>
   </head>
   <body>
-    <div class="main-container flex flex-col items-center justify-center">
-      <h1 class="text-3xl">Etch-A-Sketch</h1>
-      <div class="button-container">
+    <h1 class="flex justify-center text-3xl">Etch-A-Sketch</h1>
+    <div class="main-container flex flex-row items-center justify-evenly">
+      <div class="button-container flex flex-col">
         <label for="colorpicker">Color:</label>
         <input
           type="color"
@@ -22,6 +22,9 @@
         <button class="btn-primary board-size">Board size?</button>
         <button class="btn-primary btn-clear">Clear board</button>
         <button class="btn-primary btn-random">Random color</button>
+        <button class="btn-primary btn-random-toggle">
+          Random color toggle
+        </button>
         <button class="btn-primary">Color shading</button>
       </div>
       <div class="grid-container p-4"></div>

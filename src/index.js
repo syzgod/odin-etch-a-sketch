@@ -1,23 +1,37 @@
 /*
  TODO - divide problem into smaller pieces and solve them in smaller scale
  TODO - work with a smaller grid to reproduce the result
- TODO - ask for input(prompt from a button) to set up grid max 64*64
- TODO - setup functionality to color picker / shader so as the board reset
+ TODO - check prompt numbers are valid or not (maximize grid size)
+ TODO - setup functionality to shader
+ TODO - click and hold drawing
+ TODO - random color toggle
+ TODO - color shading toggle
 
 */
 
 const colorPicker = document.querySelector(".color-picker");
 const clearBtn = document.querySelector(".btn-clear");
 const randomBtn = document.querySelector(".btn-random");
+const randomToggle = document.querySelector(".btn-random-toggle");
 const grids = document.querySelector(".grid-container");
 const meshSize = document.querySelector(".board-size");
 
+let mesh = [...grids.childNodes];
 let rows;
 let columns;
-let color = colorPicker.value;
+let color = "#000000"; // default value
+
+const randomColor = () => {
+  color =
+    "#" +
+    Math.floor(Math.random() * (0xffffff + 1))
+      .toString(16)
+      .padStart(6, "0");
+};
 
 colorPicker.addEventListener("change", function (e) {
   color = colorPicker.value;
+  cellColoring();
 });
 
 const boardSize = () => {
@@ -36,9 +50,12 @@ function makeRows(rows, cols) {
     let cell = document.createElement("div");
     grids.appendChild(cell).className = "grid-item";
   }
-  const mesh = [...grids.childNodes];
+  mesh = [...grids.childNodes];
+  cellColoring();
+}
 
-  mesh.forEach(function (node) {
+const cellColoring = () => {
+  mesh.forEach((node) => {
     node.addEventListener("mouseenter", function (e) {
       e.target.style.backgroundColor = color;
 
@@ -47,20 +64,28 @@ function makeRows(rows, cols) {
       // }, 300);
     });
   });
-}
+};
 
 clearBtn.addEventListener("click", () => {
   grids.innerHTML = "";
+  randomBtn.style.backgroundColor = "";
+  color = "#000000";
+  console.log(color);
   makeRows(rows, columns);
 });
 
-randomBtn.addEventListener(
-  "click",
-  (randomColor = () => {
-    color =
-      "#" +
-      Math.floor(Math.random() * (0xffffff + 1))
-        .toString(16)
-        .padStart(6, "0");
-  })
-);
+randomBtn.addEventListener("click", function () {
+  randomColor();
+  cellColoring();
+  randomBtn.style.backgroundColor = color;
+});
+
+randomToggle.addEventListener("click", function () {
+  mesh.forEach((node) => {
+    node.addEventListener("mouseover", function (e) {
+      randomColor();
+      e.target.style.backgroundColor = color;
+    });
+  });
+  console.log(color);
+});
