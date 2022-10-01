@@ -10,8 +10,10 @@
   </head>
   <body>
     <h1 class="flex justify-center text-3xl">Etch-A-Sketch</h1>
-    <div class="main-container flex flex-row items-center justify-evenly">
-      <div class="button-container flex flex-col">
+    <div
+      class="main-container flex flex-col flex-wrap items-center justify-evenly"
+    >
+      <div class="button-container flex flex-row">
         <label for="colorpicker">Color:</label>
         <input
           type="color"
@@ -25,9 +27,9 @@
         <button class="btn-primary btn-random-toggle">
           Random color toggle
         </button>
-        <button class="btn-primary">Color shading</button>
+        <button class="btn-primary btn-shade-toggle">Color shading</button>
       </div>
-      <div class="grid-container p-4"></div>
+      <div class="grid-container sp-4"></div>
     </div>
   </body>
 </html>

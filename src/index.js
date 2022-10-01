@@ -6,6 +6,7 @@
  TODO - click and hold drawing
  TODO - random color toggle
  TODO - color shading toggle
+ TODO - state management to control functionality
 
 */
 
@@ -15,6 +16,7 @@ const randomBtn = document.querySelector(".btn-random");
 const randomToggle = document.querySelector(".btn-random-toggle");
 const grids = document.querySelector(".grid-container");
 const meshSize = document.querySelector(".board-size");
+const shadeToggle = document.querySelector(".btn-shade-toggle");
 
 let mesh = [...grids.childNodes];
 let rows;
@@ -22,11 +24,7 @@ let columns;
 let color = "#000000"; // default value
 
 const randomColor = () => {
-  color =
-    "#" +
-    Math.floor(Math.random() * (0xffffff + 1))
-      .toString(16)
-      .padStart(6, "0");
+  color = "#" + Math.floor(Math.random() * 16777215).toString(16);
 };
 
 colorPicker.addEventListener("change", function (e) {
@@ -38,7 +36,9 @@ const boardSize = () => {
   grids.innerHTML = "";
   rows = Number(window.prompt("How many rows do you want?", 20));
   columns = Number(window.prompt("How many columns do you want?", 20));
-  makeRows(rows, columns);
+  if (rows > 100 || columns > 100) {
+    alert("Maximum 100 can be entered");
+  } else makeRows(rows, columns);
 };
 
 meshSize.addEventListener("click", boardSize);
@@ -56,8 +56,8 @@ function makeRows(rows, cols) {
 
 const cellColoring = () => {
   mesh.forEach((node) => {
-    node.addEventListener("mouseenter", function (e) {
-      e.target.style.backgroundColor = color;
+    node.addEventListener("mouseenter", function () {
+      node.style.backgroundColor = color;
 
       // setTimeout(() => {
       //   e.target.style.backgroundColor = "pink";
@@ -75,17 +75,36 @@ clearBtn.addEventListener("click", () => {
 });
 
 randomBtn.addEventListener("click", function () {
-  randomColor();
-  cellColoring();
-  randomBtn.style.backgroundColor = color;
+  randomToggleActive = false;
+  if (randomToggleActive === false) {
+    randomColor();
+    console.log(color);
+    cellColoring();
+    randomBtn.style.backgroundColor = color;
+  }
 });
 
+let randomToggleActive = false;
+
 randomToggle.addEventListener("click", function () {
+  randomToggleActive = true;
+  if (randomToggleActive) {
+    mesh.forEach((node) => {
+      node.addEventListener("mouseover", function () {
+        randomColor();
+        console.log(color);
+        node.style.backgroundColor = color;
+      });
+    });
+  }
+});
+
+shadeToggle.addEventListener("click", function () {
   mesh.forEach((node) => {
-    node.addEventListener("mouseover", function (e) {
-      randomColor();
-      e.target.style.backgroundColor = color;
+    node.addEventListener("mouseover", function () {
+      let grabbedColor = node.getAttribute("style");
+      node.style.backgroundColor = color + "60";
+      console.log(node.style.backgroundColor);
     });
   });
-  console.log(color);
 });
